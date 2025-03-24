@@ -119,17 +119,24 @@ namespace MathModule.helpers.operations
                 {
                     var node = VariableAndVariable(variable, item);
                     if (node.Type == 1 && node.ConstantNode.Value == 1) return new ElementNode(1, 1);
-                    if (node.Type != 1) variables.Add(node);
+                    if (node.Type != 1)
+                    {
+                        variables.Add(node);
+                        variables = MinimizationNode.MinimizationVariablesInDisjunction(variables);
+                    }
                 }
                 if (item.Type == 3)
                 {
                     var node = VariableAndConjunction(variable, item);
                     if (node.Type == 1 && node.ConstantNode.Value == 1) return new ElementNode(1, 1);
-                    if (node.Type != 1) variables.Add(node);
+                    if (node.Type != 1)
+                    {
+                        variables.Add(node);
+                        variables = MinimizationNode.MinimizationVariablesInDisjunction(variables);
+                    }
                 }
             }
             if (variables.Count == 0) return new ElementNode(1, 0);
-            variables = helpers.MinimizationNode.MinimizationVariablesInDisjunction(variables);
             return new ElementNode(3, new OperationNode(1, variables));
         }
 
@@ -142,17 +149,24 @@ namespace MathModule.helpers.operations
                 {
                     var node = VariableAndConjunction(item, conjunction);
                     if (node.Type == 1 && node.ConstantNode.Value == 1) return new ElementNode(1, 1);
-                    if (node.Type != 1) variables.Add(node);
+                    if (node.Type != 1)
+                    {
+                        variables.Add(node);
+                        variables = MinimizationNode.MinimizationVariablesInDisjunction(variables);
+                    }
                 }
                 if (item.Type == 3)
                 {
                     var node = ConjunctionAndConjunction(conjunction, item);
                     if (node.Type == 1 && node.ConstantNode.Value == 1) return new ElementNode(1, 1);
-                    if (node.Type != 1) variables.Add(node);
+                    if (node.Type != 1)
+                    {
+                        variables.Add(node);
+                        variables = MinimizationNode.MinimizationVariablesInDisjunction(variables);
+                    }
                 }
             }
             if (variables.Count == 0) return new ElementNode(1, 0);
-            variables = helpers.MinimizationNode.MinimizationVariablesInDisjunction(variables);
             return new ElementNode(3, new OperationNode(1, variables));
         }
 
@@ -165,17 +179,24 @@ namespace MathModule.helpers.operations
                 {
                     var node = VariableAndDisjunction(item, disjunction2);
                     if (node.Type == 1 && node.ConstantNode.Value == 1) return new ElementNode(1, 1);
-                    if (node.Type != 1) variables = variables.Concat(node.OperationNode.Variables).ToList();
+                    if (node.Type != 1)
+                    {
+                        variables = variables.Concat(node.OperationNode.Variables).ToList();
+                        variables = MinimizationNode.MinimizationVariablesInDisjunction(variables);
+                    }
                 }
                 if (item.Type == 3)
                 {
                     var node = ConjunctionAndDisjunction(item, disjunction2);
                     if (node.Type == 1 && node.ConstantNode.Value == 1) return new ElementNode(1, 1);
-                    if (node.Type != 1) variables = variables.Concat(node.OperationNode.Variables).ToList();
+                    if (node.Type != 1)
+                    {
+                        variables = variables.Concat(node.OperationNode.Variables).ToList();
+                        variables = MinimizationNode.MinimizationVariablesInDisjunction(variables);
+                    }
                 }
             }
             if (variables.Count == 0) return new ElementNode(1, 0);
-            variables = helpers.MinimizationNode.MinimizationVariablesInDisjunction(variables);
             return new ElementNode(3, new OperationNode(1, variables));
         }
     }

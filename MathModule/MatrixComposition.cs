@@ -1,4 +1,5 @@
-﻿using MathModule.node;
+﻿using MathModule.helpers;
+using MathModule.node;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -36,6 +37,14 @@ namespace MathModule
             }
             var spaceMatrix = new List<ElementNode>();
             for (int i = 0; i < rang; i++) spaceMatrix.Add(tempMatrix[i][0]);
+            //В какой момент лучше делать минимизацию элементов дизъюнкции?
+            foreach (var item in spaceMatrix)
+            {
+                if (item.Type == 3 || item.OperationNode.Type == 1)
+                {
+                    item.OperationNode.Variables = MinimizationNode.MinimizationVariablesInDisjunction(item.OperationNode.Variables);
+                }
+            }
             return spaceMatrix;
         }
 

@@ -12,7 +12,7 @@ namespace MathModule
         {
             return new Dictionary<int, Multioperation>()
             {
-                { 0, new Multioperation(rang, new int[] {1, 1, 1, 1, 2, 4, 1, 4, 4}) },
+                { 0, new Multioperation(rang, new int[] {1, 1, 1, 1, 2, 4, 4, 4, 4}) },
                 { 1, new Multioperation(rang, new int[] {1, 2, 4, 2, 2, 2, 4, 2, 4}) },
                 { 2, new Multioperation(rang, new int[] {2, 1, 4}) },
             };
